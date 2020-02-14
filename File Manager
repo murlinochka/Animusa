@@ -1,0 +1,57 @@
+import os
+y = input('Работать с ')
+S='1. Add\n2. Delete\n3. Rename\n4. Rewrite'
+S1 ='1. Rename\n2. Number\n3. Numberdir\n4. Content\n5. Add file\n6. Add dir'
+if '.txt' in y:
+    print(S)
+else:
+    print(S1)
+i = input('Операция ')
+if i == 'Add':
+    File = y
+    f = open(File, 'a')
+    Add = input('Написать ')
+    f.write(Add)
+    f.close()   
+if i == 'Delete':
+    import os.path  #процесс не может получить доступ к файлу
+    Delete = y
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), Delete)
+    os.remove(path)
+if i == 'Rename':
+    New_name = input('Переименовать в ')
+    os.rename(y, New_name)
+if i == 'Rewrite':
+    my_file = open(y, 'w')
+    text_for_file = input('Написать заново ')
+    my_file.write(text_for_file)
+    my_file.close()
+
+
+
+if i == 'Rename dir':
+    Old_name = y
+    New_name = input('на ')
+    os.rename(Old_name, New_name)
+if i == 'Number':
+    directory = input('Введите путь ')
+    Files = os.listdir(directory)
+    print(len(Files))
+if i == 'Numberdir':
+    src = input('Путь ')
+    tree = os.walk(src)
+    k=0
+    for i in tree:
+        k=k+1
+    print(k)
+if i == 'Content':
+    content = os.listdir(input('Путь '))
+    print(content)
+if i == 'Add file':
+    path = os.getcwd()
+    name = input('Создать файл ')
+    open(name, "w")
+if i == 'Add dir':
+    path = os.getcwd()
+    tree = input('Создать папку ')
+    os.mkdir(tree)
