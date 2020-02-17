@@ -1,0 +1,76 @@
+def exercise_1(x, y):
+    return x[y]
+def exercise_2(a):
+    res = a[::2]
+    return res
+def exercise_3(A, y):
+    A = input().split()
+    y = int(input())
+        for i in range(len(A)):
+    A[i] = int(A[i])
+        for i in range(y,len(A)):
+    A[i] = (A[i])**2
+    return ' '.join(map(str, A)))
+def exercise_4:
+    A = input().split()
+    A = A[::-1]
+    return ' '.join(map(str, A))
+def exercise_5(A, y):
+    A = input().split()
+    y = int(input())
+    del A[y:len(A)]
+    return ' '.join(map(str, A))
+import random
+def exercise_7(A):
+    A = input().split()
+    random.shuffle(A)
+    return A
+def exercise_8(A):
+    A = input().split()
+    x = min(A)
+    y = max(A)
+    return x 
+    return y
+def exercise_9(A):
+    A=tuple(input())
+    for i in range(len(A)):
+        if type(A[i])==<class 'list'>:
+            return 'YES'
+        else:
+            return 'NO' 
+def exercise_10(A):
+    A=set(input())
+    for i in range(len(A)):
+        return i-1, i+1 
+def exercise_11(a, b):
+    diff_set = a.difference(b)  
+    return diff_set
+def exercise_12(A):
+    j = i+1
+    for i in range(len(A)):
+        for j in range(len(A)):
+            if i==j:
+                j**(i+1)
+    return A
+from collections import Counter
+def exercise_13(A):
+    cntr = Counter(A)
+    if sum(cnt % 2 for cnt in cntr.values()) <= len(A) % 2:
+        odd = next((k for k, v in cntr.items() if v % 2), '')
+        pat = ''.join(k * (cntr[k]//2) for k in '9876543210')
+        res = 'Yes {}'.format(pat + odd + pat[::-1])
+    else:
+        res = 'NO'
+    return res
+def exercise_14(A, y):
+    B=[]
+    for i in range(len(A)):
+        if A[i]>y:
+            B.append(A[i])
+    return B
+def exercise_15(A):
+    B=[]
+    for i in range(len(A)):
+        if A[i]%2!=0 and i%2==0:
+            B.append(A[i])
+    return B
