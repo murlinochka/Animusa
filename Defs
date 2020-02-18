@@ -33,21 +33,21 @@ def exercise_8(A):
     return y
 def exercise_9(A):
     A=tuple(input())
-    for i in range(len(A)):
+    for i in range(0, len(A)):
         if type(A[i])==<class 'list'>:
             return 'YES'
         else:
             return 'NO' 
 def exercise_10(A):
     A=set(input())
-    for i in range(len(A)):
+    for i in range(0, len(A)):
         return i-1, i+1 
 def exercise_11(a, b):
     diff_set = a.difference(b)  
     return diff_set
 def exercise_12(A):
     j = i+1
-    for i in range(len(A)):
+    for i in range(0, len(A)):
         for j in range(len(A)):
             if i==j:
                 j**(i+1)
@@ -64,13 +64,13 @@ def exercise_13(A):
     return res
 def exercise_14(A, y):
     B=[]
-    for i in range(len(A)):
+    for i in range(0, len(A)):
         if A[i]>y:
             B.append(A[i])
     return B
 def exercise_15(A):
     B=[]
-    for i in range(len(A)):
+    for i in range(0, len(A)):
         if A[i]%2!=0 and i%2==0:
             B.append(A[i])
     return B
