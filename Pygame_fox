@@ -1,0 +1,127 @@
+import pygame
+import random
+import sys
+pygame.init()
+
+display_width = 800
+display_height = 600
+
+screen = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_icon(pygame.image.load("life-count.png"))
+pygame.display.set_caption("Fox")
+
+usr_width = 62
+usr_height = 83
+usr_x = 200
+usr_y = 150
+speed = 0.4
+number_of_updates = 0
+
+enemy_width = 55
+enemy_hight = 37
+enemy_x = random.randint(0, 745)
+enemy_y = random.randint(450, 550)
+enemy_dx = 0.3
+enemy_dy = 37
+
+bullet_speed = 0.3
+bullet_width = 56
+bullet_height = 55
+bullet_color = 60, 60, 60
+bullet_x = usr_x + 7
+bullet_y = usr_y + 27
+
+bullet_img_ = pygame.image.load("apple.png")
+bullet_x_ = usr_x + 7
+bullet_y_ = usr_y + 27
+
+usr_img = pygame.image.load("fox.png")
+enemy_img = [pygame.image.load("hedgehog.png"), pygame.image.load("hedgehog2.png")]
+enemy = enemy_img[0]
+bullet_img = pygame.image.load("apple.png")
+bullet_run = False
+game_over = False
+
+
+score = 0
+score_img = pygame.image.load("coin.png")
+
+def update_high_scores():
+    pass
+def display_high_scores():
+    pass
+
+def player(usr_x, usr_y):
+    screen.blit(usr_img, (usr_x, usr_y))
+
+def bullet(bullet_x, bullet_y):
+    screen.blit(bullet_img, (bullet_x, bullet_y))
+
+def bullet_(bullet_x_, bullet_y_):
+    screen.blit(bullet_img_, (bullet_x_, bullet_y_))
+
+
+
+run = True
+while run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        if usr_x > 0:
+            usr_x-=speed
+            bullet_x_-=speed
+    if keys[pygame.K_RIGHT]:
+        if usr_x < display_width-usr_width:
+            usr_x+=speed
+            bullet_x_+=speed
+    if keys[pygame.K_SPACE] and not bullet_run:
+        bullet_run = True
+        bullet_y = usr_y + 27
+        bullet_x = usr_x + 7
+    if bullet_run:
+        bullet_y += bullet_speed
+    if bullet_y > display_height:
+        bullet_run = False
+        
+
+    screen.fill((0,100,0))      
+    player(usr_x, usr_y)
+    if bullet_run: 
+        bullet(bullet_x, bullet_y)
+    if not bullet_run:
+        bullet_(bullet_x_, bullet_y_)                                            
+    enemy_x +=enemy_dx
+
+    if enemy_x<0 or enemy_x > 745:
+        enemy_dx = -enemy_dx
+        enemy_y -= enemy_dy
+        if number_of_updates == 1:
+            enemy = enemy_img[0]
+            number_of_updates = 0
+        else:
+            number_of_updates += 1
+            enemy = enemy_img[1]
+
+
+    if bullet_run:
+        if ((-enemy_width) <= (enemy_x - bullet_x) <= bullet_width) and ((-enemy_hight)<= (enemy_y - bullet_y) <= bullet_height):
+            bullet_run = False
+            enemy_x = random.randint(0, 745)
+            enemy_y = random.randint(450, 550)
+            score += 1
+
+
+    if ((-enemy_width)<=(enemy_x - usr_x)<=usr_width) and ((-usr_height)<=(usr_y - enemy_y)<=enemy_hight):
+        run = False
+
+    screen
+    screen.blit(enemy, (enemy_x, enemy_y))
+    screen.blit(score_img, (15, 15))
+    font = pygame.font.Font(None, 50)
+    score_number = font.render(str(score), 1, (0, 0, 0))
+    screen.blit(score_number, (50, 15))
+
+    pygame.display.flip()
